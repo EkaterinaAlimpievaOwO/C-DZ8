@@ -94,78 +94,78 @@ int[,] CreateSpiralMatrix(int m, int n)
 {
     int[,] matrix = new int[m, n];
 
-    int elementsLeft = m * n;
+    int numOfElements = m * n;
     int step = 0;
     int direction = 0;
 
-    int topBorder = 0;
-    int leftBorder = 0;
-    int bottomBorder = m - 1;
-    int rightBorder = n - 1;
+    int topBorder = -1;
+    int leftBorder = -1;
+    int bottomBorder = m;
+    int rightBorder = n;
 
 
     int i = 0;
     int j = 0;
 
-    while (elementsLeft >= 0)
+    while (step < numOfElements)
     {
         matrix[i, j] = step;
         step++;
-        elementsLeft--;
 
-        if (direction == 0)
+        if (direction == 0) // right
         {
-            if ((j + 1) <= rightBorder)
+            if (j + 1 < rightBorder)
             {
+
                 j++;
             }
             else
             {
-                direction = 1;
+                direction = 1; // move down
                 topBorder++;
             }
         }
 
-        if (direction == 1)
+        if (direction == 1) // down
         {
-            if ((i + 1) <= bottomBorder)
+            if (i + 1 < bottomBorder)
             {
                 i++;
             }
             else
             {
-                direction = 2;
+                direction = 2; // move left
                 rightBorder--;
             }
         }
 
-        if (direction == 2)
+        if (direction == 2) // left
         {
-            if ((j - 1) >= leftBorder)
+            if (j - 1 > leftBorder)
             {
                 j--;
             }
             else
             {
-                direction = 3;
+                direction = 3; // move up
                 bottomBorder--;
             }
         }
 
-        if (direction == 3)
+        if (direction == 3) // up
         {
-            if ((i - 1) >= topBorder)
+            if (i - 1 > topBorder)
             {
                 i--;
             }
             else
             {
-                direction = 0;
+                direction = 0; // move right
                 leftBorder++;
+                j++;
             }
         }
-        // PrintIntMatrix(matrix); // test
-        // Console.WriteLine(); // test
+
     }
 
     return matrix;
